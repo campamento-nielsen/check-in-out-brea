@@ -1,0 +1,633 @@
+[index.html](https://github.com/user-attachments/files/29062164/index.html)
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Campamento La Brea — Nielsen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --orange:       #E8622A;
+  --orange-light: #F07A45;
+  --orange-dim:   #3A1E0F;
+  --orange-text:  #F0A07A;
+  --bg:        #111418;
+  --surface:   #181C22;
+  --surface2:  #1E232B;
+  --surface3:  #252B35;
+  --surface4:  #2C3340;
+  --border:        rgba(255,255,255,0.07);
+  --border-strong: rgba(255,255,255,0.14);
+  --text:       #E6EAF0;
+  --text-muted: #7A8899;
+  --text-hint:  #465060;
+  --green:      #4AC97A;
+  --green-dim:  #1A3828;
+  --green-text: #7DE0A8;
+  --red:        #E05C5C;
+  --red-dim:    #3A1A1A;
+  --red-text:   #F09898;
+  --amber-dim:  #362A10;
+  --amber-text: #E0B860;
+  --blue-dim:   #152030;
+  --blue-text:  #6EB8E8;
+  --radius:    10px;
+  --radius-sm: 6px;
+  --radius-xs: 4px;
+  --mono: 'DM Mono', monospace;
+}
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; line-height: 1.6; }
+.topbar {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 0 1.5rem; height: 58px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 50;
+}
+.topbar-brand { display: flex; align-items: center; gap: 12px; }
+.nielsen-logo { height: 32px; width: auto; display: block; }
+.brand-wordmark { font-size: 15px; font-weight: 700; color: var(--orange); letter-spacing: .04em; font-family: var(--mono); }
+.brand-sep { width: 1px; height: 22px; background: var(--border-strong); }
+.brand-sub { font-size: 12px; color: var(--text-muted); font-family: var(--mono); letter-spacing: .04em; }
+.topbar-right { display: flex; align-items: center; gap: 10px; }
+.topbar-date { font-size: 12px; color: var(--text-muted); font-family: var(--mono); }
+.live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;}50%{opacity:.4;} }
+.admin-btn {
+  background: var(--surface3); border: 1px solid var(--border-strong);
+  color: var(--text-muted); border-radius: var(--radius-sm);
+  padding: 6px 14px; font-size: 12px; font-family: 'DM Sans', sans-serif;
+  cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all .15s;
+}
+.admin-btn:hover { color: var(--orange); border-color: var(--orange); }
+.view { display: none; }
+.view.active { display: block; }
+
+/* CLIENT */
+.client-wrap { display: flex; flex-direction: column; align-items: center; padding: 2.5rem 1.25rem 5rem; }
+.client-header { text-align: center; margin-bottom: 2rem; width: 100%; max-width: 440px; }
+.client-logo-wrap { margin-bottom: 1.25rem; }
+.client-wordmark { font-size: 28px; font-weight: 700; color: var(--orange); font-family: var(--mono); letter-spacing: .06em; }
+.client-title { font-size: 12px; font-weight: 500; color: var(--text-muted); letter-spacing: .1em; text-transform: uppercase; font-family: var(--mono); margin-bottom: 4px; }
+.client-camp { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 6px; }
+.client-sub { font-size: 14px; color: var(--text-muted); line-height: 1.55; }
+.client-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; width: 100%; max-width: 440px; }
+.c-section-label { font-family: var(--mono); font-size: 10px; color: var(--text-hint); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+.c-section-label::after { content:''; flex:1; height:1px; background:var(--border); }
+.c-form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.c-label { font-size: 12px; font-weight: 500; color: var(--text-muted); letter-spacing: .03em; }
+.c-input, .c-select { padding: 12px 14px; font-size: 15px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); background: var(--surface2); color: var(--text); font-family: 'DM Sans', sans-serif; width: 100%; transition: border-color .15s, box-shadow .15s; -webkit-appearance: none; appearance: none; }
+.c-input::placeholder { color: var(--text-hint); }
+.c-input:focus, .c-select:focus { outline: none; border-color: var(--orange); box-shadow: 0 0 0 3px rgba(232,98,42,.14); }
+.c-divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+.btn-submit { width: 100%; padding: 14px; background: var(--orange); color: #fff; font-size: 15px; font-weight: 600; border: none; border-radius: var(--radius-sm); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .15s, transform .1s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-submit:hover { background: var(--orange-light); }
+.btn-submit:active { transform: scale(.99); }
+.c-error { display: none; background: var(--red-dim); color: var(--red-text); border: 1px solid rgba(224,92,92,.2); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 13px; margin-bottom: 14px; align-items: center; gap: 8px; }
+.c-error.show { display: flex; }
+.c-timestamp { font-family: var(--mono); font-size: 11px; color: var(--text-hint); text-align: center; margin-top: 1.25rem; }
+.c-success { display: none; text-align: center; padding: 2rem 1rem; width: 100%; max-width: 440px; }
+.c-success.show { display: block; }
+.success-icon { width: 68px; height: 68px; border-radius: 50%; background: var(--green-dim); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; font-size: 30px; color: var(--green); animation: popIn .4s cubic-bezier(.34,1.56,.64,1); }
+@keyframes popIn { from{transform:scale(.5);opacity:0;}to{transform:scale(1);opacity:1;} }
+.success-title { font-size: 20px; font-weight: 600; letter-spacing:-0.02em; margin-bottom:8px; color:var(--green-text); }
+.success-sub { font-size:14px; color:var(--text-muted); margin-bottom:1.5rem; line-height:1.6; }
+.success-data { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:1rem 1.25rem; text-align:left; margin-bottom:1.5rem; }
+.data-row { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--border); font-size:13px; }
+.data-row:last-child { border-bottom:none; }
+.data-label { color:var(--text-muted); }
+.data-value { font-weight:500; font-family:var(--mono); font-size:12px; }
+.btn-nuevo { background:var(--surface); color:var(--text-muted); border:1px solid var(--border); border-radius:var(--radius-sm); padding:11px 20px; font-size:14px; font-family:'DM Sans',sans-serif; cursor:pointer; transition:all .15s; }
+.btn-nuevo:hover { color:var(--text); border-color:var(--border-strong); }
+
+/* PIN */
+.pin-overlay { display:none; position:fixed; inset:0; background:rgba(10,14,18,.93); backdrop-filter:blur(6px); z-index:100; align-items:center; justify-content:center; }
+.pin-overlay.show { display:flex; }
+.pin-box { background:var(--surface); border:1px solid var(--border-strong); border-radius:var(--radius); padding:2rem; width:100%; max-width:320px; text-align:center; }
+.pin-wordmark { font-size:22px; font-weight:700; color:var(--orange); font-family:var(--mono); letter-spacing:.06em; margin-bottom:1.25rem; }
+.pin-title { font-size:15px; font-weight:600; margin-bottom:4px; }
+.pin-sub { font-size:13px; color:var(--text-muted); margin-bottom:1.5rem; }
+.pin-input { width:100%; padding:12px; font-size:24px; letter-spacing:.5em; text-align:center; background:var(--surface2); border:1px solid var(--border-strong); border-radius:var(--radius-sm); color:var(--text); font-family:var(--mono); margin-bottom:10px; -webkit-appearance:none; }
+.pin-input:focus { outline:none; border-color:var(--orange); box-shadow:0 0 0 3px rgba(232,98,42,.14); }
+.pin-error { font-size:12px; color:var(--red-text); margin-bottom:10px; min-height:18px; }
+.pin-actions { display:flex; gap:8px; }
+.btn-pin-ok { flex:1; padding:11px; background:var(--orange); color:#fff; font-size:14px; font-weight:600; border:none; border-radius:var(--radius-sm); cursor:pointer; font-family:'DM Sans',sans-serif; }
+.btn-pin-ok:hover { background:var(--orange-light); }
+.btn-pin-cancel { padding:11px 16px; background:none; color:var(--text-muted); border:1px solid var(--border); border-radius:var(--radius-sm); cursor:pointer; font-family:'DM Sans',sans-serif; font-size:14px; }
+
+/* ADMIN */
+.admin-main { max-width: 1080px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+.page-eyebrow { font-family: var(--mono); font-size: 11px; color: var(--orange); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 5px; }
+.page-title { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 3px; }
+.page-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 1.75rem; }
+.stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 1.5rem; }
+.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; position: relative; overflow: hidden; }
+.stat-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--border); }
+.stat-card.orange-accent::before { background: var(--orange); }
+.stat-card.green-accent::before  { background: var(--green); }
+.stat-card.red-accent::before    { background: var(--red); }
+.stat-label { font-family:var(--mono); font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px; }
+.stat-num { font-size:30px; font-weight:600; line-height:1; letter-spacing:-0.03em; }
+.stat-num.orange { color:var(--orange); }
+.stat-num.green  { color:var(--green); }
+.stat-num.red    { color:var(--red); }
+.tabs { display:flex; gap:2px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:4px; margin-bottom:1.25rem; }
+.tab { flex:1; padding:9px 8px; border:none; background:none; border-radius:var(--radius-sm); font-size:13px; font-weight:500; cursor:pointer; color:var(--text-muted); font-family:'DM Sans',sans-serif; display:flex; align-items:center; justify-content:center; gap:6px; transition:all .15s; }
+.tab.active { background:var(--surface3); color:var(--text); }
+.tab:hover:not(.active) { color:var(--text); }
+.panel { display:none; }
+.panel.active { display:block; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem; margin-bottom:1rem; }
+.card-title { font-family:var(--mono); font-size:11px; font-weight:500; color:var(--text-muted); margin-bottom:1.25rem; display:flex; align-items:center; gap:8px; text-transform:uppercase; letter-spacing:.08em; }
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.form-group { display:flex; flex-direction:column; gap:6px; }
+label { font-size:12px; font-weight:500; color:var(--text-muted); letter-spacing:.02em; }
+input, select { padding:9px 12px; font-size:14px; border:1px solid var(--border-strong); border-radius:var(--radius-sm); background:var(--surface2); color:var(--text); font-family:'DM Sans',sans-serif; width:100%; transition:border-color .15s, box-shadow .15s; }
+input::placeholder { color:var(--text-hint); }
+input:focus, select:focus { outline:none; border-color:var(--orange); box-shadow:0 0 0 3px rgba(232,98,42,.12); }
+select option { background:var(--surface2); }
+.divider { height:1px; background:var(--border); margin:1.25rem 0; }
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 18px; font-size:13px; font-weight:500; border:none; border-radius:var(--radius-sm); cursor:pointer; font-family:'DM Sans',sans-serif; transition:all .15s; }
+.btn-orange { background:var(--orange); color:#fff; width:100%; }
+.btn-orange:hover { background:var(--orange-light); }
+.btn-red { background:var(--red); color:#fff; width:100%; }
+.btn-red:hover { background:#ee7070; }
+.btn-ghost { background:var(--surface3); color:var(--text-muted); border:1px solid var(--border); }
+.btn-ghost:hover { color:var(--text); border-color:var(--border-strong); }
+.btn-sm { padding:6px 12px; font-size:12px; }
+.btn-green-sm { background:var(--green-dim); color:var(--green-text); border:1px solid rgba(74,201,122,.2); }
+.btn-green-sm:hover { background:#224836; }
+.search-wrap { position:relative; margin-bottom:1rem; }
+.search-wrap i { position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:17px; color:var(--text-hint); pointer-events:none; }
+.search-wrap input { padding-left:38px; }
+.person-card { display:none; background:var(--surface2); border-radius:var(--radius-sm); padding:14px 16px; margin-bottom:14px; border:1px solid var(--border); }
+.person-card.show { display:block; }
+.person-name { font-size:15px; font-weight:600; margin-bottom:5px; }
+.person-meta { font-size:13px; color:var(--text-muted); display:flex; flex-wrap:wrap; gap:10px; }
+.badge { display:inline-flex; align-items:center; gap:4px; padding:3px 9px; border-radius:20px; font-size:11px; font-weight:500; font-family:var(--mono); }
+.badge-green  { background:var(--green-dim);  color:var(--green-text); }
+.badge-red    { background:var(--red-dim);    color:var(--red-text); }
+.badge-orange { background:var(--orange-dim); color:var(--orange-text); }
+.badge-blue   { background:var(--blue-dim);   color:var(--blue-text); }
+.table-toolbar { display:flex; gap:10px; margin-bottom:1rem; align-items:center; }
+.table-toolbar .search-wrap { flex:1; margin-bottom:0; }
+.filter-select { width:auto; min-width:150px; padding:9px 12px; }
+.table-actions { display:flex; gap:8px; justify-content:flex-end; margin-bottom:10px; }
+.table-wrap { overflow-x:auto; border-radius:var(--radius); border:1px solid var(--border); background:var(--surface); }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+thead tr { background:var(--surface2); }
+th { padding:10px 14px; text-align:left; font-family:var(--mono); font-size:10px; font-weight:400; color:var(--text-muted); text-transform:uppercase; letter-spacing:.08em; border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:11px 14px; border-bottom:1px solid var(--border); color:var(--text); max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+td.mono { font-family:var(--mono); font-size:12px; color:var(--text-muted); }
+tr:last-child td { border-bottom:none; }
+tr:hover td { background:var(--surface2); }
+.empty-state { text-align:center; padding:3rem 2rem; color:var(--text-hint); font-size:14px; }
+.empty-state i { font-size:28px; display:block; margin-bottom:8px; opacity:.35; }
+.modal-overlay { display:none; position:fixed; inset:0; background:rgba(10,14,18,.93); backdrop-filter:blur(4px); z-index:200; align-items:center; justify-content:center; padding:1rem; }
+.modal-overlay.show { display:flex; }
+.modal-box { background:var(--surface); border:1px solid var(--border-strong); border-radius:var(--radius); padding:1.75rem; width:100%; max-width:520px; max-height:90vh; overflow-y:auto; }
+.modal-header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:1.25rem; }
+.modal-title { font-size:16px; font-weight:600; }
+.modal-sub { font-size:13px; color:var(--text-muted); margin-top:3px; }
+.modal-close { background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:20px; padding:2px; }
+.modal-close:hover { color:var(--text); }
+.sector-list { display:flex; flex-direction:column; gap:8px; margin-bottom:1.25rem; }
+.sector-group { border:1px solid var(--border); border-radius:var(--radius-sm); overflow:hidden; }
+.sector-header { padding:10px 14px; background:var(--surface2); font-size:12px; font-weight:600; color:var(--orange); letter-spacing:.04em; text-transform:uppercase; font-family:var(--mono); display:flex; justify-content:space-between; align-items:center; }
+.sector-rooms { padding:10px; display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:8px; }
+.room-btn { padding:10px 8px; border-radius:var(--radius-xs); border:1px solid var(--border-strong); background:var(--surface3); color:var(--text); font-size:13px; font-weight:500; cursor:pointer; text-align:center; transition:all .15s; font-family:'DM Sans',sans-serif; display:flex; flex-direction:column; align-items:center; gap:3px; }
+.room-btn:hover:not(.occupied) { border-color:var(--orange); color:var(--orange); background:var(--orange-dim); }
+.room-btn.occupied { background:var(--red-dim); border-color:rgba(224,92,92,.25); color:var(--red-text); cursor:not-allowed; opacity:.7; }
+.room-btn.selected { border-color:var(--orange); background:var(--orange-dim); color:var(--orange-text); }
+.room-num { font-family:var(--mono); font-size:15px; font-weight:600; }
+.room-info { font-size:10px; opacity:.7; }
+.modal-footer { display:flex; gap:8px; margin-top:1.25rem; }
+.btn-confirm-ubicacion { flex:1; padding:11px; background:var(--orange); color:#fff; font-size:14px; font-weight:600; border:none; border-radius:var(--radius-sm); cursor:pointer; font-family:'DM Sans',sans-serif; display:flex; align-items:center; justify-content:center; gap:8px; }
+.btn-confirm-ubicacion:hover { background:var(--orange-light); }
+.btn-cancel-modal { padding:11px 18px; background:none; color:var(--text-muted); border:1px solid var(--border); border-radius:var(--radius-sm); cursor:pointer; font-family:'DM Sans',sans-serif; font-size:14px; }
+#toast { position:fixed; bottom:24px; right:24px; padding:11px 18px; border-radius:var(--radius); font-size:13px; font-weight:500; display:none; align-items:center; gap:9px; z-index:999; border:1px solid transparent; }
+#toast.show { display:flex; }
+#toast.t-green  { background:var(--green-dim);  color:var(--green-text);  border-color:rgba(74,201,122,.2); }
+#toast.t-red    { background:var(--red-dim);    color:var(--red-text);    border-color:rgba(224,92,92,.2); }
+#toast.t-orange { background:var(--orange-dim); color:var(--orange-text); border-color:rgba(232,98,42,.2); }
+#toast.t-err    { background:var(--amber-dim);  color:var(--amber-text);  border-color:rgba(224,184,96,.2); }
+@media (max-width:640px){
+  .form-grid { grid-template-columns:1fr; }
+  .stats-row { grid-template-columns:1fr 1fr; }
+  .stats-row .stat-card:first-child { grid-column:1/-1; }
+  .admin-main { padding:1rem 1rem 3rem; }
+  .topbar { padding:0 1rem; }
+  .topbar-date, .brand-sep, .brand-sub { display:none; }
+  .table-toolbar { flex-direction:column; }
+  .filter-select { width:100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">
+    <span class="brand-wordmark">NIELSEN</span>
+    <div class="brand-sep"></div>
+    <span class="brand-sub">CAMPAMENTO LA BREA</span>
+  </div>
+  <div class="topbar-right">
+    <div class="live-dot"></div>
+    <div class="topbar-date" id="topbar-date"></div>
+    <button class="admin-btn" onclick="handleAdminBtn()">
+      <i class="ti ti-lock" id="admin-btn-icon"></i>
+      <span id="admin-btn-label">Supervisión</span>
+    </button>
+  </div>
+</div>
+
+<div class="pin-overlay" id="pin-overlay">
+  <div class="pin-box">
+    <div class="pin-wordmark">NIELSEN</div>
+    <div class="pin-title">Acceso de supervisión</div>
+    <p class="pin-sub">Ingresá el PIN para continuar</p>
+    <input class="pin-input" type="password" id="pin-input" maxlength="4" inputmode="numeric" placeholder="····" onkeydown="if(event.key==='Enter')checkPin()">
+    <div class="pin-error" id="pin-error"></div>
+    <div class="pin-actions">
+      <button class="btn-pin-cancel" onclick="closePin()">Cancelar</button>
+      <button class="btn-pin-ok" onclick="checkPin()">Entrar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-ubicacion">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modal-guest-name">Asignar ubicación</div>
+        <div class="modal-sub" id="modal-guest-info"></div>
+      </div>
+      <button class="modal-close" onclick="closeUbicacion()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="sector-list" id="sector-list"></div>
+    <div style="font-size:12px;color:var(--text-hint);margin-bottom:1rem;display:flex;gap:16px;">
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:var(--surface3);border:1px solid var(--border-strong);display:inline-block"></span> Libre</span>
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:var(--red-dim);border:1px solid rgba(224,92,92,.25);display:inline-block"></span> Ocupada</span>
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:var(--orange-dim);border:1px solid rgba(232,98,42,.3);display:inline-block"></span> Seleccionada</span>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel-modal" onclick="closeUbicacion()">Cancelar</button>
+      <button class="btn-confirm-ubicacion" onclick="confirmarUbicacion()"><i class="ti ti-map-pin"></i> Confirmar ubicación</button>
+    </div>
+  </div>
+</div>
+
+<!-- VISTA PERSONAL -->
+<div class="view active" id="view-client">
+  <div class="client-wrap">
+    <div class="client-header">
+      <div class="client-logo-wrap">
+        <div class="client-wordmark">NIELSEN</div>
+      </div>
+      <div class="client-title">Campamento La Brea</div>
+      <p class="client-sub">Completá tus datos para registrar tu ingreso.</p>
+    </div>
+    <div class="client-card" id="client-form-card">
+      <div class="c-error" id="c-error">
+        <i class="ti ti-alert-circle"></i>
+        <span id="c-error-msg"></span>
+      </div>
+      <div class="c-section-label">Datos personales</div>
+      <div class="c-form-group">
+        <span class="c-label">NOMBRE COMPLETO *</span>
+        <input class="c-input" type="text" id="c-nombre" placeholder="Ej: Juan Pérez" autocomplete="name">
+      </div>
+      <div class="c-form-group">
+        <span class="c-label">DNI *</span>
+        <input class="c-input" type="text" id="c-dni" placeholder="Ej: 28345678" inputmode="numeric" autocomplete="off">
+      </div>
+      <div class="c-section-label" style="margin-top:4px">Datos de ingreso</div>
+      <div class="c-form-group">
+        <span class="c-label">EMPRESA / ÁREA *</span>
+        <input class="c-input" type="text" id="c-empresa" placeholder="Ej: ERA, Emergencias, Restec..." autocomplete="organization">
+      </div>
+      <div class="c-divider"></div>
+      <button class="btn-submit" onclick="clientSubmit()">
+        <i class="ti ti-login"></i> Registrar ingreso
+      </button>
+      <p class="c-timestamp" id="c-timestamp"></p>
+    </div>
+    <div class="c-success" id="c-success">
+      <div class="success-icon"><i class="ti ti-check"></i></div>
+      <h2 class="success-title">¡Ingreso registrado!</h2>
+      <p class="success-sub">Tu entrada quedó guardada. La supervisión asignará tu habitación.</p>
+      <div class="success-data" id="c-success-data"></div>
+      <button class="btn-nuevo" onclick="clientReset()">Registrar otro ingreso</button>
+    </div>
+  </div>
+</div>
+
+<!-- VISTA ADMIN -->
+<div class="view" id="view-admin">
+  <div class="admin-main">
+    <div class="page-eyebrow">Panel de supervisión</div>
+    <p class="page-title">Registro de personal</p>
+    <p class="page-sub">Check-in, asignación de habitaciones y control de salidas.</p>
+    <div class="stats-row">
+      <div class="stat-card green-accent">
+        <div class="stat-label">En campamento</div>
+        <div class="stat-num green" id="stat-adentro">0</div>
+      </div>
+      <div class="stat-card orange-accent">
+        <div class="stat-label">Sin habitación</div>
+        <div class="stat-num orange" id="stat-sinhabit">0</div>
+      </div>
+      <div class="stat-card red-accent">
+        <div class="stat-label">Salidas hoy</div>
+        <div class="stat-num red" id="stat-salidas">0</div>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('in')"   id="tab-in"><i class="ti ti-login"></i> Check-in</button>
+      <button class="tab"        onclick="switchTab('out')"  id="tab-out"><i class="ti ti-logout"></i> Check-out</button>
+      <button class="tab"        onclick="switchTab('list')" id="tab-list"><i class="ti ti-users"></i> Personal</button>
+      <button class="tab"        onclick="switchTab('mapa')" id="tab-mapa"><i class="ti ti-map"></i> Mapa</button>
+    </div>
+    <div class="panel active" id="panel-in">
+      <div class="card">
+        <div class="card-title"><i class="ti ti-user-plus"></i> Registrar ingreso manual</div>
+        <div class="form-grid">
+          <div class="form-group"><label>Nombre completo</label><input type="text" id="in-nombre" placeholder="Ej: Juan Pérez" autocomplete="off"></div>
+          <div class="form-group"><label>DNI</label><input type="text" id="in-dni" placeholder="Ej: 28345678" autocomplete="off"></div>
+          <div class="form-group"><label>Empresa / Área</label><input type="text" id="in-empresa" placeholder="Ej: ERA, Emergencias, Restec..."></div>
+          <div class="form-group"><label>Fecha de ingreso</label><input type="date" id="in-fecha"></div>
+          <div class="form-group"><label>Hora de ingreso</label><input type="time" id="in-hora"></div>
+        </div>
+        <div class="divider"></div>
+        <button class="btn btn-orange" onclick="doCheckin()"><i class="ti ti-login"></i> Confirmar ingreso</button>
+      </div>
+    </div>
+    <div class="panel" id="panel-out">
+      <div class="card">
+        <div class="card-title"><i class="ti ti-search"></i> Registrar salida</div>
+        <div class="search-wrap">
+          <i class="ti ti-search"></i>
+          <input type="text" id="out-search" placeholder="Buscar por nombre o DNI..." oninput="searchPerson()">
+        </div>
+        <div class="person-card" id="person-result"></div>
+        <button class="btn btn-red" id="btn-checkout" style="display:none" onclick="doCheckout()"><i class="ti ti-logout"></i> Confirmar salida</button>
+      </div>
+    </div>
+    <div class="panel" id="panel-list">
+      <div class="table-toolbar">
+        <div class="search-wrap" style="margin-bottom:0">
+          <i class="ti ti-search"></i>
+          <input type="text" id="list-search" placeholder="Filtrar por nombre o DNI..." oninput="updateTable()">
+        </div>
+        <select class="filter-select" id="list-filtro" onchange="updateTable()">
+          <option value="">Todos</option>
+          <option value="adentro">En campamento</option>
+          <option value="afuera">Con salida</option>
+          <option value="sinhabit">Sin habitación</option>
+        </select>
+      </div>
+      <div class="table-actions">
+        <button class="btn btn-ghost btn-sm" onclick="exportCSV()"><i class="ti ti-file-spreadsheet"></i> Exportar CSV</button>
+        <button class="btn btn-ghost btn-sm" onclick="clearAll()" style="color:var(--red-text)"><i class="ti ti-trash"></i> Borrar todo</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Nombre</th><th>DNI</th><th>Empresa</th><th>Sector</th><th>Habitación</th><th>Ingreso</th><th>Salida</th><th>Estado</th><th></th></tr></thead>
+          <tbody id="table-body"><tr><td colspan="9"><div class="empty-state"><i class="ti ti-users-group"></i>No hay registros aún.</div></td></tr></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel" id="panel-mapa">
+      <div id="mapa-content"></div>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+var ADMIN_PIN='1234';
+var STORAGE_KEY='nielsen_labrea_v2';
+var SECTORES=[
+  {id:'brea-norte',   label:'Brea Norte',      total:14, habitaciones:[1,2,3,4,5,6]},
+  {id:'brea-sur',     label:'Brea Sur',        total:14, habitaciones:[8,9,10,11,12]},
+  {id:'brea-este',    label:'Brea Este',       total:9,  habitaciones:[13,14,15,16,17,18,19]},
+  {id:'brea-centro1', label:'Brea Centro 1',   total:8,  habitaciones:[1,2]},
+  {id:'brea-centro2', label:'Brea Centro 2',   total:8,  habitaciones:[5,6]},
+  {id:'brea-centro3', label:'Brea Centro 3',   total:22, habitaciones:[4,3]},
+  {id:'brea-centro4', label:'Brea Centro 4',   total:8,  habitaciones:[7,8]},
+  {id:'brea-centro5', label:'Brea Centro 5',   total:12, habitaciones:[9,10]},
+  {id:'modulo1',      label:'Módulo 1',        total:4,  habitaciones:[20]},
+  {id:'modulo2',      label:'Módulo 2',        total:4,  habitaciones:[21]},
+  {id:'sala-norte',   label:'Sala Rec. Norte', total:8,  habitaciones:[1,2,3,4,5,6,7,8]},
+];
+var records=[];
+var selectedId=null;
+var adminUnlocked=false;
+var modalGuestId=null;
+var modalSelectedRoom=null;
+function pad(n){return n<10?'0'+n:''+n;}
+function nowDate(){var d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+function nowTime(){var d=new Date();return pad(d.getHours())+':'+pad(d.getMinutes());}
+function formatDate(s){if(!s)return'—';var p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(records));}catch(e){}}
+function load(){try{var r=localStorage.getItem(STORAGE_KEY);if(r)records=JSON.parse(r);}catch(e){records=[];}}
+(function(){
+  load();
+  document.getElementById('in-fecha').value=nowDate();
+  document.getElementById('in-hora').value=nowTime();
+  updateTopbarDate(); setInterval(updateTopbarDate,30000);
+  updateClientTimestamp(); setInterval(updateClientTimestamp,30000);
+  updateStats();
+})();
+function updateTopbarDate(){
+  var d=new Date();
+  var dias=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  var meses=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  var el=document.getElementById('topbar-date');
+  if(el)el.textContent=dias[d.getDay()]+' '+pad(d.getDate())+' '+meses[d.getMonth()]+' · '+pad(d.getHours())+':'+pad(d.getMinutes());
+}
+function updateClientTimestamp(){
+  var d=new Date();
+  var dias=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  var meses=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  var el=document.getElementById('c-timestamp');
+  if(el)el.textContent=dias[d.getDay()]+' '+pad(d.getDate())+' '+meses[d.getMonth()]+' — '+pad(d.getHours())+':'+pad(d.getMinutes());
+}
+var toastT=null;
+function showToast(msg,type){
+  var t=document.getElementById('toast');
+  t.className='show t-'+type;
+  var ico={green:'ti-circle-check',red:'ti-circle-x',orange:'ti-map-pin',err:'ti-alert-circle'}[type]||'ti-info-circle';
+  t.innerHTML='<i class="ti '+ico+'"></i> '+msg;
+  clearTimeout(toastT);
+  toastT=setTimeout(function(){t.className='';},3500);
+}
+function handleAdminBtn(){if(adminUnlocked){exitAdmin();}else{document.getElementById('pin-overlay').classList.add('show');setTimeout(function(){document.getElementById('pin-input').focus();},80);}}
+function checkPin(){
+  var val=document.getElementById('pin-input').value;
+  if(val===ADMIN_PIN){adminUnlocked=true;document.getElementById('pin-overlay').classList.remove('show');document.getElementById('pin-input').value='';document.getElementById('pin-error').textContent='';enterAdmin();}
+  else{document.getElementById('pin-error').textContent='PIN incorrecto. Intentá de nuevo.';document.getElementById('pin-input').value='';document.getElementById('pin-input').focus();}
+}
+function closePin(){document.getElementById('pin-overlay').classList.remove('show');document.getElementById('pin-input').value='';document.getElementById('pin-error').textContent='';}
+function enterAdmin(){document.getElementById('view-client').classList.remove('active');document.getElementById('view-admin').classList.add('active');document.getElementById('admin-btn-icon').className='ti ti-lock-open';document.getElementById('admin-btn-label').textContent='Salir';updateStats();updateTable();}
+function exitAdmin(){adminUnlocked=false;document.getElementById('view-admin').classList.remove('active');document.getElementById('view-client').classList.add('active');document.getElementById('admin-btn-icon').className='ti ti-lock';document.getElementById('admin-btn-label').textContent='Supervisión';}
+function updateStats(){
+  var today=nowDate();
+  document.getElementById('stat-adentro').textContent=records.filter(function(r){return r.estado==='adentro';}).length;
+  document.getElementById('stat-sinhabit').textContent=records.filter(function(r){return r.estado==='adentro'&&!r.habitacion;}).length;
+  document.getElementById('stat-salidas').textContent=records.filter(function(r){return r.estado==='afuera'&&r.fechaSalida===today;}).length;
+}
+function switchTab(tab){
+  ['in','out','list','mapa'].forEach(function(t){
+    document.getElementById('panel-'+t).classList.toggle('active',t===tab);
+    document.getElementById('tab-'+t).classList.toggle('active',t===tab);
+  });
+  if(tab==='list')updateTable();
+  if(tab==='mapa')renderMapa();
+}
+function doCheckin(){
+  var nombre=document.getElementById('in-nombre').value.trim();
+  var dni=document.getElementById('in-dni').value.trim();
+  var empresa=document.getElementById('in-empresa').value.trim();
+  var fecha=document.getElementById('in-fecha').value;
+  var hora=document.getElementById('in-hora').value;
+  if(!nombre||!dni||!empresa||!fecha||!hora){showToast('Completá todos los campos.','err');return;}
+  if(records.find(function(r){return r.dni===dni&&r.estado==='adentro';})){showToast('Ese DNI ya tiene un ingreso activo.','err');return;}
+  records.unshift({id:Date.now(),nombre:nombre,dni:dni,empresa:empresa,fecha:fecha,hora:hora,estado:'adentro',salida:null,fechaSalida:null,sector:null,habitacion:null});
+  save();updateStats();updateTable();
+  showToast('Ingreso registrado: '+nombre,'green');
+  document.getElementById('in-nombre').value='';document.getElementById('in-dni').value='';document.getElementById('in-empresa').value='';document.getElementById('in-hora').value=nowTime();
+}
+function searchPerson(){
+  var q=document.getElementById('out-search').value.trim().toLowerCase();
+  var res=document.getElementById('person-result');
+  var btn=document.getElementById('btn-checkout');
+  selectedId=null;
+  if(q.length<2){res.className='person-card';btn.style.display='none';return;}
+  var found=records.filter(function(r){return r.estado==='adentro'&&(r.nombre.toLowerCase().includes(q)||r.dni.includes(q));});
+  res.className='person-card show';
+  if(!found.length){res.innerHTML='<div style="color:var(--text-muted);font-size:14px">No se encontró persona activa.</div>';btn.style.display='none';return;}
+  var r=found[0];selectedId=r.id;
+  var habitInfo=r.habitacion?('<span class="badge badge-orange" style="margin-left:8px"><i class="ti ti-door"></i> '+r.sector+' · Hab. '+r.habitacion+'</span>'):'<span class="badge badge-blue" style="margin-left:8px">Sin habitación asignada</span>';
+  res.innerHTML='<div class="person-name">'+r.nombre+habitInfo+'</div><div class="person-meta"><span><i class="ti ti-id-badge"></i>'+r.dni+'</span><span><i class="ti ti-building"></i>'+r.empresa+'</span></div><div style="margin-top:10px"><span class="badge badge-green"><i class="ti ti-clock"></i> Ingresó '+formatDate(r.fecha)+' a las '+r.hora+'</span></div>';
+  btn.style.display='flex';
+}
+function doCheckout(){
+  if(!selectedId)return;
+  var r=records.find(function(x){return x.id===selectedId;});
+  if(r){r.estado='afuera';r.salida=nowTime();r.fechaSalida=nowDate();save();showToast('Salida registrada: '+r.nombre,'red');}
+  document.getElementById('out-search').value='';document.getElementById('person-result').className='person-card';document.getElementById('btn-checkout').style.display='none';selectedId=null;updateStats();
+}
+function updateTable(){
+  var q=document.getElementById('list-search').value.trim().toLowerCase();
+  var filtro=document.getElementById('list-filtro').value;
+  var tbody=document.getElementById('table-body');
+  var data=records.filter(function(r){
+    var mq=!q||r.nombre.toLowerCase().includes(q)||r.dni.includes(q);
+    var mf=!filtro||r.estado===filtro||(filtro==='sinhabit'&&r.estado==='adentro'&&!r.habitacion);
+    return mq&&mf;
+  });
+  if(!data.length){tbody.innerHTML='<tr><td colspan="9"><div class="empty-state"><i class="ti ti-users-group"></i>No hay registros que coincidan.</div></td></tr>';return;}
+  tbody.innerHTML=data.map(function(r){
+    var badge=r.estado==='adentro'?'<span class="badge badge-green"><i class="ti ti-circle-dot"></i> Adentro</span>':'<span class="badge badge-red"><i class="ti ti-circle-x"></i> Salió</span>';
+    var habitCell=r.habitacion?('<span class="badge badge-orange">'+r.sector+' · '+r.habitacion+'</span>'):'<span class="badge badge-blue">Sin asignar</span>';
+    var asignarBtn=r.estado==='adentro'?'<button class="btn btn-green-sm btn-sm" onclick="openUbicacion('+r.id+')"><i class="ti ti-map-pin"></i> Ubicar</button>':'';
+    return '<tr><td title="'+r.nombre+'">'+r.nombre+'</td><td class="mono">'+r.dni+'</td><td title="'+r.empresa+'">'+r.empresa+'</td><td>'+(r.sector||'—')+'</td><td>'+habitCell+'</td><td class="mono">'+formatDate(r.fecha)+' '+r.hora+'</td><td class="mono">'+(r.salida?formatDate(r.fechaSalida)+' '+r.salida:'—')+'</td><td>'+badge+'</td><td>'+asignarBtn+'</td></tr>';
+  }).join('');
+}
+function getOccupiedRooms(){
+  var occ={};
+  records.filter(function(r){return r.estado==='adentro'&&r.sector&&r.habitacion;}).forEach(function(r){occ[r.sector+'|'+r.habitacion]=r.nombre;});
+  return occ;
+}
+function openUbicacion(id){
+  var r=records.find(function(x){return x.id===id;});
+  if(!r)return;
+  modalGuestId=id;modalSelectedRoom=null;
+  document.getElementById('modal-guest-name').textContent=r.nombre;
+  document.getElementById('modal-guest-info').textContent='DNI '+r.dni+' · '+r.empresa;
+  var occ=getOccupiedRooms();
+  document.getElementById('sector-list').innerHTML=SECTORES.map(function(s){
+    var rooms=s.habitaciones.map(function(num){
+      var key=s.label+'|'+num;
+      var isOcc=occ[key]&&occ[key]!==r.nombre;
+      var isSel=r.sector===s.label&&r.habitacion==num;
+      var cls='room-btn'+(isOcc?' occupied':isSel?' selected':'');
+      return '<button class="'+cls+'" onclick="selectRoom(this,\''+s.label+'\','+num+','+isOcc+')" data-sector="'+s.label+'" data-room="'+num+'"><span class="room-num">'+num+'</span><span class="room-info">'+(isOcc?occ[key].split(' ')[0]:'libre')+'</span></button>';
+    }).join('');
+    return '<div class="sector-group"><div class="sector-header">'+s.label+'<span style="font-size:11px;color:var(--text-hint)">'+s.total+' plazas</span></div><div class="sector-rooms">'+rooms+'</div></div>';
+  }).join('');
+  document.getElementById('modal-ubicacion').classList.add('show');
+}
+function selectRoom(btn,sector,room,occupied){
+  if(occupied)return;
+  document.querySelectorAll('.room-btn.selected').forEach(function(b){b.classList.remove('selected');});
+  btn.classList.add('selected');
+  modalSelectedRoom={sector:sector,room:room};
+}
+function confirmarUbicacion(){
+  if(!modalSelectedRoom){showToast('Seleccioná una habitación primero.','err');return;}
+  var r=records.find(function(x){return x.id===modalGuestId;});
+  if(r){r.sector=modalSelectedRoom.sector;r.habitacion=modalSelectedRoom.room;save();updateStats();updateTable();showToast(r.nombre+' → '+r.sector+' Hab. '+r.habitacion,'orange');}
+  closeUbicacion();
+}
+function closeUbicacion(){document.getElementById('modal-ubicacion').classList.remove('show');modalGuestId=null;modalSelectedRoom=null;}
+function renderMapa(){
+  var occ=getOccupiedRooms();
+  document.getElementById('mapa-content').innerHTML=SECTORES.map(function(s){
+    var occupiedCount=s.habitaciones.filter(function(n){return occ[s.label+'|'+n];}).length;
+    var rooms=s.habitaciones.map(function(num){
+      var key=s.label+'|'+num;var who=occ[key];
+      var style=who?'background:var(--orange-dim);border-color:rgba(232,98,42,.4);color:var(--orange-text);':'';
+      return '<div style="padding:10px 8px;border-radius:6px;border:1px solid var(--border-strong);background:var(--surface3);text-align:center;'+style+'"><div style="font-family:var(--mono);font-size:15px;font-weight:600;">'+num+'</div><div style="font-size:10px;margin-top:3px;opacity:.75;">'+(who?who.split(' ').slice(0,2).join(' '):'libre')+'</div></div>';
+    }).join('');
+    return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;"><div style="padding:12px 16px;background:var(--surface2);display:flex;justify-content:space-between;align-items:center;"><span style="font-family:var(--mono);font-size:12px;font-weight:600;color:var(--orange);">'+s.label.toUpperCase()+'</span><span style="font-size:12px;color:var(--text-muted);">'+occupiedCount+' / '+s.total+' plazas</span></div><div style="padding:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;">'+rooms+'</div></div>';
+  }).join('');
+}
+function exportCSV(){
+  if(!records.length){showToast('No hay registros para exportar.','err');return;}
+  var bom='\uFEFF';
+  var hdrs=['Nombre','DNI','Empresa','Sector','Habitación','Fecha ingreso','Hora ingreso','Fecha salida','Hora salida','Estado'];
+  var rows=records.map(function(r){return['"'+r.nombre.replace(/"/g,'""')+'"',r.dni,'"'+r.empresa.replace(/"/g,'""')+'"',r.sector||'',r.habitacion||'',formatDate(r.fecha),r.hora,r.fechaSalida?formatDate(r.fechaSalida):'',r.salida||'',r.estado==='adentro'?'En campamento':'Salió'].join(',');});
+  var csv=bom+hdrs.join(',')+'\n'+rows.join('\n');
+  var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='labrea-'+nowDate()+'.csv';a.click();URL.revokeObjectURL(url);
+  showToast('Exportado correctamente.','green');
+}
+function clearAll(){if(!confirm('¿Borrar todos los registros? Esta acción no se puede deshacer.'))return;records=[];save();updateStats();updateTable();showToast('Registros eliminados.','red');}
+function clientSubmit(){
+  var nombre=document.getElementById('c-nombre').value.trim();
+  var dni=document.getElementById('c-dni').value.trim();
+  var empresa=document.getElementById('c-empresa').value.trim();
+  var errEl=document.getElementById('c-error');
+  var errMsg=document.getElementById('c-error-msg');
+  errEl.className='c-error';
+  if(!nombre||!dni||!empresa){errMsg.textContent='Completá todos los campos.';errEl.className='c-error show';return;}
+  if(!/^\d{7,9}$/.test(dni)){errMsg.textContent='El DNI debe tener entre 7 y 9 dígitos numéricos.';errEl.className='c-error show';return;}
+  load();
+  if(records.find(function(r){return r.dni===dni&&r.estado==='adentro';})){errMsg.textContent='Ese DNI ya tiene un ingreso activo registrado.';errEl.className='c-error show';return;}
+  var fecha=nowDate(),hora=nowTime();
+  records.unshift({id:Date.now(),nombre:nombre,dni:dni,empresa:empresa,fecha:fecha,hora:hora,estado:'adentro',salida:null,fechaSalida:null,sector:null,habitacion:null});
+  save();
+  document.getElementById('c-success-data').innerHTML=dRow('Nombre',nombre)+dRow('DNI',dni)+dRow('Empresa',empresa)+dRow('Fecha',formatDate(fecha))+dRow('Hora',hora);
+  document.getElementById('client-form-card').style.display='none';
+  document.getElementById('c-success').className='c-success show';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function dRow(l,v){return'<div class="data-row"><span class="data-label">'+l+'</span><span class="data-value">'+v+'</span></div>';}
+function clientReset(){
+  ['c-nombre','c-dni','c-empresa'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('c-error').className='c-error';
+  document.getElementById('c-success').className='c-success';
+  document.getElementById('client-form-card').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
